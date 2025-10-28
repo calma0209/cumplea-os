@@ -1,0 +1,229 @@
+/* ====== Tema y reset ====== */
+:root{
+  --txt:#111827;
+  --txt-inv:#ffffff;
+  /* paleta pastel alegre */
+  --bg-a:#e9c686;   /* rosa muy claro */
+  --bg-b:#ffffe9;   /* azul hielo */
+  --bg-c:#fdf5de;   /* vainilla */
+  --glass:#ffffff66;
+
+  --vio1:#8a5bff; --vio2:#a573ff; --vio3:#c392ff;
+  --icing:#ffe9f4; --icing2:#ffffff;
+  --accent:#ff9a1a; --glow:#ffcc33;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; display:flex; align-items:center; justify-content:center;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+  color:var(--txt);
+  /* Fondo alegre con degradados suaves */
+  background:
+    radial-gradient(1200px 800px at 10% -10%, #ffd1ea66, transparent 65%),
+    radial-gradient(800px 600px at 110% 10%, #c2f0ff66, transparent 60%),
+    linear-gradient(180deg, var(--bg-b), var(--bg-a) 60%, var(--bg-c));
+}
+
+/* ====== Ventana delantera (tarjeta) ====== */
+.ventana{
+  width:min(900px, 92vw);
+  background: linear-gradient(180deg, #ffffffaa, #ffffff80);
+  border:1px solid #ffffffb3;
+  border-radius:24px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 50px rgba(0,0,0,.13);
+  padding: clamp(18px, 3.5vw, 32px);
+  text-align:center;
+  position:relative;
+}
+h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  background: linear-gradient(90deg, #a275ff, #d16ba5, #f7c8e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgb(245, 181, 104);
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(162, 117, 255, 0.25);
+  margin-bottom: 10px;
+}
+
+
+
+
+
+/* ====== Tarta responsive ====== */
+.tarta{
+  --w: clamp(200px, 58vw, 420px); /* ancho base de la tarta */
+  width: var(--w);
+  height: calc(var(--w) * .86);
+  margin: clamp(8px, 3.5vw, 22px) auto 4px;
+  position: relative;
+}
+
+/* Capas casi pegadas entre sí */
+.capa{
+  position:absolute; left:50%; transform: translateX(-50%);
+  width: calc(var(--w) * .86);
+  height: calc(var(--w) * .21);
+  border-radius: 16px;
+  /* volumen */
+  box-shadow:
+    0 10px 0 rgba(0,0,0,.12),          /* sombra externa base */
+    inset 0 -10px 0 #6f3df0;           /* sombreado inferior */
+  background: linear-gradient(180deg, #b792ff 0%, #9a6bff 65%);
+}
+
+/* TOP (capa1) ligeramente más estrecha y con glaseado */
+.capa1{
+  top: calc(var(--w) * .12);
+  width: calc(var(--w) * .78);
+  background: linear-gradient(180deg, #d8bbff 0%, #b586ff 65%);
+  box-shadow: 0 10px 0 rgba(0,0,0,.12), inset 0 -10px 0 #854cff;
+  position: relative;
+}
+
+/* Glaseado a rayas, recortado arriba */
+.capa1::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:16px;
+  background: repeating-linear-gradient(90deg, var(--icing) 0 16px, var(--icing2) 16px 32px);
+  -webkit-mask: linear-gradient(#000 0 62%, transparent 62%);
+          mask: linear-gradient(#000 0 62%, transparent 62%);
+}
+
+/* Goteos simplificados (2) SIN desbordes ni barras raras */
+.capa1::after{
+  content:"";
+  position:absolute; top:-6px; left:0; right:0; height:26px;
+  background:
+    radial-gradient(8px 13px at 20% 13px, var(--icing) 98%, transparent 100%) no-repeat,
+    radial-gradient(8px 18px at 70% 18px, var(--icing) 98%, transparent 100%) no-repeat;
+  background-size:14px 26px, 14px 26px;
+}
+
+/* MID (capa2) – pegada a la superior */
+.capa2{
+  top: calc(var(--w) * .34);                /* muy poca separación */
+  width: calc(var(--w) * .86);
+  background: linear-gradient(180deg, #c7a6ff 0%, #a573ff 65%);
+  box-shadow: 0 10px 0 rgba(0,0,0,.12), inset 0 -10px 0 #7c49f4;
+}
+
+/* BASE (capa3) – pegada a la del medio */
+.capa3{
+  top: calc(var(--w) * .56);
+  width: calc(var(--w) * .92);
+  background: linear-gradient(180deg, #a573ff 0%, #8a5bff 65%);
+  box-shadow: 0 10px 0 rgba(0,0,0,.12), inset 0 -10px 0 #6f3df0;
+}
+
+/* Vela centrada */
+.vela{
+  position:absolute;
+  left:50%;
+  top: calc(var(--w) * .02);
+  transform: translateX(-50%);
+  width: clamp(14px, 2.8vw, 18px);
+  height: clamp(44px, 8vw, 56px);
+  background: repeating-linear-gradient(45deg,#ffd54f 0 6px, var(--accent) 6px 12px);
+  border-radius: 6px;
+  box-shadow: 0 6px 0 #00000015;
+}
+
+/* Llama animada */
+.flama{
+  position:absolute;
+  left:50%; transform: translateX(-50%);
+  top: clamp(-22px, -4.2vw, -28px);
+  width: clamp(14px, 3.4vw, 18px);
+  height: clamp(20px, 4.6vw, 26px);
+  border-radius:50% 50% 45% 45%;
+  background: radial-gradient(ellipse at 50% 60%, #fff7b1 0%, #ffce00 45%, var(--accent) 70%, rgba(255,138,0,0) 72%);
+  filter: drop-shadow(0 0 10px var(--glow));
+  transform-origin: 50% 100%;
+  animation: flame .12s infinite alternate ease-in-out;
+}
+@keyframes flame{
+  from{ transform: translateX(-50%) rotate(-2deg) scale(1) }
+  to  { transform: translateX(-50%) rotate( 2deg) scale(1.06) }
+}
+
+/* Móvil pequeño */
+@media (max-width: 420px){
+  .ventana{ padding: 16px }
+}
+/* ===== Controles (incrustados por JS) ===== */
+.controls-bar{
+  margin-top: clamp(10px, 3vw, 18px);
+  display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:center;
+}
+.btn{
+  appearance:none; border:none; cursor:pointer;
+  padding: 10px 14px; border-radius:12px; font-weight:700; color:#fff;
+  background: linear-gradient(90deg, #8b9cff, #6c7aff);
+  box-shadow: 0 8px 18px rgba(0,0,0,.15);
+}
+.btn.primary{ background: linear-gradient(90deg, #23c8b5, #149e8d); }
+.btn.success{ background: linear-gradient(90deg, #ff9a1a, #ff7a00); }
+.btn:active{ transform: translateY(1px); }
+
+.status{ font-size: 13px; color:#555; margin-left: 6px }
+
+/* Llama apagada */
+.flama.off{ opacity: 0; transition: opacity .25s ease; }
+/* ===== Modal para pedir micro ===== */
+.modal-overlay{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  display: grid; place-items: center;
+  z-index: 9999;
+}
+.modal{
+  width: min(520px, 90vw);
+  background: #fff;
+  color: #111827;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.25);
+  text-align: center;
+}
+.modal h2{ margin: 0 0 8px; font-size: 20px }
+.modal p{ margin: 0 0 14px; color: #374151 }
+.modal .actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
+.modal .btn{
+  appearance:none; border:none; cursor:pointer;
+  padding: 10px 14px; border-radius:12px; font-weight:700; color:#fff;
+  background: linear-gradient(90deg, #23c8b5, #149e8d);
+}
+.modal .btn.secondary{ background: linear-gradient(90deg, #9aa3af, #6b7280); color:#fff }
+/* ===== Imagen decorativa de la foca ===== */
+.foca-img {
+  width: clamp(150px, 25vw, 100px);
+  margin: 0 auto 10px;
+  display: block;
+  animation: flotar 3s ease-in-out infinite alternate;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.15));
+}
+
+/* Animación de flotación suave */
+@keyframes flotar {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-8px); }
+}
+
+/* Lienzo de confeti (no bloquea clics) */
+/* Lienzo de confeti */
+#confetti{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0;                 /* empieza oculto */
+  transition: opacity .4s ease;
+}
+
+
