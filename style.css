@@ -38,17 +38,46 @@ body{
   text-align:center;
   position:relative;
 }
-h1 {
-  font-family: "Poppins", sans-serif;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
+h/* Contenedor del título con emojis laterales */
+.titulo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: clamp(6px, 1.8vw, 14px);
+  margin: 0 0 clamp(10px, 3vw, 16px);
+  white-space: nowrap;         /* evita saltos */
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Texto del título: TUS colores/valores */
+.titulo .texto{
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 800;
+  font-size: clamp(24px, 6.5vw, 42px);
+  line-height: 1.1;
   background: linear-gradient(90deg, #a275ff, #d16ba5, #f7c8e0);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: rgb(245, 181, 104);
-  letter-spacing: 1px;
-  text-shadow: 0 2px 8px rgba(162, 117, 255, 0.25);
-  margin-bottom: 10px;
+  -webkit-text-fill-color: rgb(245, 181, 104);   /* tu color dorado visible */
+  letter-spacing: .4px;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.7),
+    0 10px 22px rgba(0,0,0,.10);
 }
+
+/* Emojis fluidos a los lados */
+.titulo .emoji{
+  font-size: clamp(20px, 6vw, 34px);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.12));
+}
+
+/* Microajuste para móviles muy estrechos */
+@media (max-width: 360px){
+  .titulo{ gap: 6px }
+  .titulo .texto{ font-size: clamp(20px, 7.2vw, 34px) }
+  .titulo .emoji{ font-size: clamp(18px, 5.6vw, 28px) }
+}
+
 
 
 
@@ -89,7 +118,7 @@ h1 {
 .capa1::before{
   content:"";
   position:absolute; inset:0;
-  border-radius:16px;
+  border-radius:15px;
   background: repeating-linear-gradient(90deg, var(--icing) 0 16px, var(--icing2) 16px 32px);
   -webkit-mask: linear-gradient(#000 0 62%, transparent 62%);
           mask: linear-gradient(#000 0 62%, transparent 62%);
@@ -98,9 +127,9 @@ h1 {
 /* Goteos simplificados (2) SIN desbordes ni barras raras */
 .capa1::after{
   content:"";
-  position:absolute; top:-6px; left:0; right:0; height:26px;
+  /* position:absolute; top:-6px; left:0; right:0; height:26px; */
   background:
-    radial-gradient(8px 13px at 20% 13px, var(--icing) 98%, transparent 100%) no-repeat,
+    radial-gradient(px 13px at 20% 13px, var(--icing) 98%, transparent 100%) no-repeat,
     radial-gradient(8px 18px at 70% 18px, var(--icing) 98%, transparent 100%) no-repeat;
   background-size:14px 26px, 14px 26px;
 }
